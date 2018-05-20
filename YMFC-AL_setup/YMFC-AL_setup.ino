@@ -1,3 +1,4 @@
+//TRADUZIDO MAS NAO REVISADO
 ///////////////////////////////////////////////////////////////////////////////////////
 //Terms of use
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -506,7 +507,7 @@ byte search_gyro(int gyro_address, int who_am_i){
   Wire.endTransmission();
   Wire.requestFrom(gyro_address, 1);
   timer = millis() + 100;
-  while(Wire.available() < 1 && timer > millis());
+  while(timer > millis());
   lowByte = Wire.read();
   address = gyro_address;
   return lowByte;
@@ -524,7 +525,7 @@ void start_gyro(){
     Wire.write(0x20);                                            //Start reading @ register 28h and auto increment with every read
     Wire.endTransmission();                                      //End the transmission
     Wire.requestFrom(address, 1);                                //Request 6 bytes from the gyro
-    while(Wire.available() < 1);                                 //Wait until the 1 byte is received
+    //while(Wire.available() < 1);                                 //Wait until the 1 byte is received
     Serial.print(F("Registro 0x20 configurado para:"));
     Serial.println(Wire.read(),BIN);
 
@@ -537,7 +538,7 @@ void start_gyro(){
     Wire.write(0x23);                                            //Start reading @ register 28h and auto increment with every read
     Wire.endTransmission();                                      //End the transmission
     Wire.requestFrom(address, 1);                                //Request 6 bytes from the gyro
-    while(Wire.available() < 1);                                 //Wait until the 1 byte is received
+    //while(Wire.available() < 1);                                 //Wait until the 1 byte is received
     Serial.print(F("Registro 0x23 configurado para:"));
     Serial.println(Wire.read(),BIN);
 
@@ -554,7 +555,7 @@ void start_gyro(){
     Wire.write(0x6B);                                            //Start reading @ register 28h and auto increment with every read
     Wire.endTransmission();                                      //End the transmission
     Wire.requestFrom(address, 1);                                //Request 1 bytes from the gyro
-    while(Wire.available() < 1);                                 //Wait until the 1 byte is received
+    //while(Wire.available() < 1);                                 //Wait until the 1 byte is received
     Serial.print(F("Registro 0x6B configurado para:"));
     Serial.println(Wire.read(),BIN);
     
@@ -567,7 +568,7 @@ void start_gyro(){
     Wire.write(0x1B);                                            //Start reading @ register 28h and auto increment with every read
     Wire.endTransmission();                                      //End the transmission
     Wire.requestFrom(address, 1);                                //Request 1 bytes from the gyro
-    while(Wire.available() < 1);                                 //Wait until the 1 byte is received
+    //while(Wire.available() < 1);                                 //Wait until the 1 byte is received
     Serial.print(F("Registro 0x1B configurado para:"));
     Serial.println(Wire.read(),BIN);
 
@@ -580,7 +581,7 @@ void gyro_signalen(){
     Wire.write(168);                                             //Start reading @ register 28h and auto increment with every read
     Wire.endTransmission();                                      //End the transmission
     Wire.requestFrom(address, 6);                                //Request 6 bytes from the gyro
-    while(Wire.available() < 6);                                 //Wait until the 6 bytes are received
+    //while(Wire.available() < 6);                                 //Wait until the 6 bytes are received
     lowByte = Wire.read();                                       //First received byte is the low part of the angular data
     highByte = Wire.read();                                      //Second received byte is the high part of the angular data
     gyro_roll = ((highByte<<8)|lowByte);                         //Multiply highByte by 256 (shift left by 8) and ad lowByte
@@ -599,7 +600,7 @@ void gyro_signalen(){
     Wire.write(0x43);                                            //Start reading @ register 43h and auto increment with every read
     Wire.endTransmission();                                      //End the transmission
     Wire.requestFrom(address,6);                                 //Request 6 bytes from the gyro
-    while(Wire.available() < 6);                                 //Wait until the 6 bytes are received
+    //while(Wire.available() < 6);                                 //Wait until the 6 bytes are received
     gyro_roll=Wire.read()<<8|Wire.read();                        //Read high and low part of the angular data
     if(cal_int == 2000)gyro_roll -= gyro_roll_cal;               //Only compensate after the calibration
     gyro_pitch=Wire.read()<<8|Wire.read();                       //Read high and low part of the angular data
